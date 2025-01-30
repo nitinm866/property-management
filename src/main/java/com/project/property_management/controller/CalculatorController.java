@@ -27,13 +27,13 @@ public class CalculatorController {
     }
 
     @PostMapping("/mul")
-    public  ResponseEntity<Double> Multiply(@RequestBody CalculatorDTO calculatorDTO) {
+    public  ResponseEntity<Double> multiply(@RequestBody CalculatorDTO calculatorDTO) {
 
         Double result = null;
         result = calculatorDTO.getNum1()*calculatorDTO.getNum2()*calculatorDTO.getNum3()*calculatorDTO.getNum4();
 
-        ResponseEntity<Double> responseEntity = new ResponseEntity<Double>(result, HttpStatus.CREATED);
+       // ResponseEntity<Double> responseEntity = new ResponseEntity<Double>(result, HttpStatus.CREATED);
 
-        return responseEntity;
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 }

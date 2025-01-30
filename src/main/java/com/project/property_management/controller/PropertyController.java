@@ -2,9 +2,7 @@ package com.project.property_management.controller;
 
 import com.project.property_management.dto.PropertyDTO;
 import com.project.property_management.service.PropertyService;
-import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,20 +33,17 @@ public class PropertyController {
     @PostMapping("/saveProperty")
     public ResponseEntity<PropertyDTO> save(@RequestBody PropertyDTO propertyDTO){
         propertyDTO = propertyService.saveProperty(propertyDTO);
-        ResponseEntity<PropertyDTO> responseEntity = new ResponseEntity<>(propertyDTO, HttpStatus.CREATED);
-        return responseEntity;
+        return new ResponseEntity<>(propertyDTO, HttpStatus.CREATED);
     }
     @GetMapping("/listProperties")
     public List<PropertyDTO> getAllProperties(){
-        System.out.println(dbUrl);
         return propertyService.getAllProperties();
     }
 
     @PutMapping("/properties/{propertyId}")
     public ResponseEntity<PropertyDTO> updateProperty(@RequestBody PropertyDTO propertyDTO,@PathVariable Long propertyId){
         propertyDTO = propertyService.updateProperty(propertyDTO,propertyId);
-        ResponseEntity<PropertyDTO> responseEntity = new ResponseEntity<>(propertyDTO, HttpStatus.ACCEPTED);
-        return responseEntity;
+        return new ResponseEntity<>(propertyDTO, HttpStatus.ACCEPTED);
     }
 
     @PatchMapping("/properties/update-description/{propertyId}")
@@ -64,11 +59,8 @@ public class PropertyController {
     }
 
     @DeleteMapping("/properties/delete-property/{propertyId}")
-    public ResponseEntity deleteProperty(@PathVariable Long propertyId){
+    public ResponseEntity<Long> deleteProperty(@PathVariable Long propertyId){
         propertyService.deleteProperty(propertyId);
-
-        ResponseEntity<Long> responseEntity = new ResponseEntity<>(null, HttpStatus.ACCEPTED);
-
-        return responseEntity;
+        return new ResponseEntity<>(propertyId, HttpStatus.ACCEPTED);
     }
 }
