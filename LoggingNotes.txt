@@ -1,0 +1,13 @@
+Levels of Log:
+1. Trace
+2. Debug
+3. Info
+4. Warning
+5. Error
+
+Library to be used:
+SLF4J with Log back
+
+* We can set profile based logging.
+
+In Springboot SLF4J with Log back is default. No need to add any dependency.
